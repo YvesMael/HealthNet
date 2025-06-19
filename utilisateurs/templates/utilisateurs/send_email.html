@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>page a envoyer par email</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; width: 100%;">
+{% if verification_code %}
+    <div class="email_page" style="display: flex; flex-direction: column; gap: 3.5em; text-align: center; width: 100%;">
+        <div class="head" style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1.5em;">
+            <div class="title_losange" style="display: flex; gap: 6em;">
+                <div class="losange_left" style="position: relative; width: 5em; height: 5em;">
+                    <div class="square losange1" style="border-radius: 0.6em; transform: rotate(143.76deg); width: 3.7em; height: 2.68em; border: 1px solid  #007CB2; background: #007CB2; position: absolute; left: 12%; top: 27%;"></div>
+                    <div class="square losange4 " style="border-radius: 0.6em; transform: rotate(143.76deg); width: 1.99em; height: 1.1em; background: #007db317; border: 1px solid #007db317; position: absolute; top: 84%; left: 60%;"></div>
+                    <div class="square losange3 " style="border-radius: 0.6em; transform: rotate(143.76deg); width: 4.82em; height: 3.9em; background: rgb(217, 217, 217); border: 1px solid rgb(217, 217, 217); position: absolute; top: 0%; left: -48%; z-index: -1;"></div>
+                </div>
+                <div class="title" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="first_title" style="font-size: 2.5em; font-weight: 800;">
+                        <span>HEALTH</span><span style="color:  #007CB2;">NET</span>
+                    </div>
+                    <p style="font-size: 1.25em; font-weight: 800;">GYPSUM</p>
+                </div>
+                <div class="losange_right" style="position: relative; width: 5em; height: 5em;">
+                    <div class="square losange2 " style="border-radius: 0.6em; transform: rotate(143.76deg); width: 3.7em; height: 2.68em; border: 1px solid  #007CB2; background:   #007CB2; position: absolute; transform: rotate(-323.76deg); left: 14.7%; top: 27%;"></div>
+                    <div class="square losange5 " style="border-radius: 0.6em; transform: rotate(143.76deg); width: 1.99em; height: 1.1em; background: #007db317; border: 1px solid #007db317; position: absolute; transform: rotate(-323.76deg); top: 84%; left: -2%;"></div>
+                    <div class="square losange6 " style="border-radius: 0.6em; transform: rotate(143.76deg); width: 4.82em; height: 3.9em; background: rgb(217, 217, 217); border: 1px solid rgb(217, 217, 217); position: absolute; transform: rotate(-323.76deg); top: 8.9%; left: 43.9%; z-index: -1;"></div>
+                </div>
+            </div>
+            <div class="horizontal_line" style="height: 0.1em; width: 42em; background-color: black;"></div>
+        </div>
+        <div class="corp_page" style="display: flex; justify-content: center; align-items: center; text-align: center; width: 100%;">
+            <div class="body" style="display: flex; flex-direction: column; text-align: center; gap: 2em; align-items: flex-start;">
+                <h3 style="font-size: 1.25em; font-weight: 800;">Hi {{user.username}}</h3>
+                <div class="text1" style="display: flex; justify-content: center; align-items: center; text-align: left;">
+                    <p style="font-size: 0.88em; font-weight: 800;">To keep your account secure,we need to verify your email address,Use the <br>
+                    verification code below to complete the process.</p>
+                </div>
+                <div class="veri_code" style="display: flex; flex-direction: column; justify-content: center; text-align: left;">
+                    <h4 style="font-size: 0.94em; font-weight: 800;">VERIFICATION CODE</h4>
+                    <H1 style="font-weight: 800; font-size: 1.5em; color: #007CB2;">{{ verification_code }}</H1>
+                </div>
+                <div class="text1" style="display: flex; justify-content: center; align-items: center; text-align: left;">
+                    <p style="font-size: 0.88em; font-weight: 800;">Enter this code on the verification page to confirm your email address.If <br>
+                    you didn't request this code,please ignore this email.</p>
+                </div>
+                <div class="veri_code" style="display: flex; flex-direction: column; justify-content: center; text-align: left;">
+                    <h3 style="font-size: 1em; font-weight: 800;">SUPPORT INFORMATION</h3>
+                    <P style="font-weight: 800;">Need help? contact our <span style="color:#007CB2; font-weight: 800;">Support team</span></P>
+                </div>
+                <div class="text1" style="display: flex; justify-content: center; align-items: center; text-align: left;">
+                    <p style="font-size: 0.88em; font-weight: 800;">Cheers!! <br>
+                    HEALTHNET gypsum Team</p>
+                </div>
+            </div>
+        </div>
+        <div class="bottom_line" style="display: flex; justify-content: center; align-items: center;">
+            <div class="horizontal_line" style="height: 0.1em; width: 42em; background-color: black;"></div>
+        </div>
+    </div>
+{% else %}
+    <h2>Hello, </h2>
+    <p>Dear {{user.username}}, If you received this email it means that you forgot your password..<br>Click on this link <a href="http://127.0.0.1:8000/{% url 'Utilisateurs:change_forgotten_password' uidb64=uid token=token %}" >Change my password</a></p>
+    <br><p>You should ignore this email if you didn't ask for password changing</p>
+    <br><br><p>Thanks</p><h4>Gypsum</h4>
+{% endif %}
+</body>
+</html>
